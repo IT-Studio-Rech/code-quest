@@ -1,0 +1,35 @@
+.search-data-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.product-list-container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+}
+
+.product-card {
+  width: 300px;
+  margin: 16px;
+}
+
+.delivery-date {
+  display: flex;
+  column-gap: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-button {
+  margin-left: 10px;
+}

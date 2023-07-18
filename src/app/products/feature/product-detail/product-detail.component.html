@@ -1,0 +1,51 @@
+<ng-container *ngIf="!!product">
+  <img
+    mat-card-image
+    [src]="product.imageUrl"
+    [attr.alt]="product.name"
+    class="product-image"
+  />
+  <div class="product-details">
+    <div>
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+      <p>Preis: {{ product.price | currency : "EUR" }}</p>
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Produktinformationen</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let parameter of product.parameters">
+          <p>{{ parameter.key }}: {{ parameter.value }}</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="product-actions">
+      <p>
+        <strong
+        >Gesamtwert: {{ product.price * quantity | currency : "EUR" }}
+        </strong>
+      </p>
+      <mat-form-field appearance="fill">
+        <mat-label>Anzahl</mat-label>
+        <mat-select [(value)]="quantity">
+          <mat-option
+            *ngFor="let number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+            [value]="number"
+          >
+            {{ number }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/shopping-cart"
+        (click)="addToCart(product.id)"
+      >
+        In den Einkaufswagen
+      </button>
+    </div>
+  </div>
+</ng-container>

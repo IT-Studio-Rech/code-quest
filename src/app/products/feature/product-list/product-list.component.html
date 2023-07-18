@@ -1,0 +1,31 @@
+<ng-container *ngIf="searchedProducts | filterProducts: searchKey: searchTags as filteredProducts">
+  <div class="search-data-container">
+    <mat-form-field>
+      <mat-label>Suche</mat-label>
+      <div class="input-wrapper">
+        <input #searchKeyInput matInput [(ngModel)]="searchKey" name="searchKey" placeholder="Produkt suchen...">
+      </div>
+    </mat-form-field>
+
+    <mat-chip-listbox multiple="true" aria-label="Tagauswahl">
+      <mat-chip-option *ngFor="let tag of getTagsFromProducts(filteredProducts)"
+                       (click)="selectedTagsChanged(tag)">{{tag}}</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+
+  <div class="product-list-container">
+    <mat-card *ngFor="let product of filteredProducts" class="product-card">
+      <img mat-card-image [src]="product.imageUrl" alt="Product Image" [routerLink]="'/product/' + product.id"/>
+      <mat-card-content>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Preis: {{ product.price | currency: 'EUR' }}</p>
+
+        <div class="delivery-date">
+          <p>Lieferdatum: {{ product.deliveryDate | date: 'dd.MM.YYYY' }}</p>
+          <div [appEmojiDependentOnDate]="product.deliveryDate"></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>

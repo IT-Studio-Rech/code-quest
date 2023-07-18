@@ -1,0 +1,59 @@
+<h1>Einkaufswagen</h1>
+
+<div class="shopping-cart-container">
+  <mat-card *ngFor="let item of cartItems$ | async" class="shopping-cart-item">
+    <img
+      mat-card-image
+      [src]="item.product.imageUrl"
+      [attr.alt]="item.product.name"
+      [routerLink]="'/product/' + item.product.id"
+    />
+
+    <mat-card-content>
+      <h2>{{ item.product.name }}</h2>
+      <p>Preis: {{ item.product.price | currency : "EUR" }}</p>
+      <p>
+        <strong
+        >Gesamtwert:
+          {{ item.product.price * item.quantity | currency : "EUR" }}
+        </strong>
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <mat-form-field appearance="fill">
+        <mat-label>Anzahl</mat-label>
+        <mat-select
+          [(value)]="item.quantity"
+          (selectionChange)="
+            onEditProductQuantity(item.product.id, $event.value)
+          "
+        >
+          <mat-option
+            *ngFor="let number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+            [value]="number"
+          >
+            {{ number }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-button
+        color="warn"
+        (click)="onRemoveProduct(item.product.id)"
+      >
+        Remove Product
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Abschnitt zur Anzeige des Gesamtpreises und Abschluss des Kaufs -->
+  <div class="total-price-section">
+    <p>
+      <strong>Gesamtpreis: {{ totalPrice$ | async | currency : "EUR" }}</strong>
+    </p>
+    <button mat-raised-button color="primary" (click)="onCompletePurchase()">
+      Kauf abschließen
+    </button>
+  </div>
+</div>
