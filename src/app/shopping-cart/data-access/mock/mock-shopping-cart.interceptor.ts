@@ -13,7 +13,8 @@ export const MockShoppingCartInterceptor: HttpInterceptorFn = (request, next) =>
         .map((id) => ({
           product: MOCK_PRODUCTS().find((product) => product.id === id),
           quantity: shoppingCart[id],
-        }));
+        }))
+        .filter(item => item.product);
 
     return of(new HttpResponse({status: 200, body: responseData}));
   }
