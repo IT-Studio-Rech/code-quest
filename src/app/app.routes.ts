@@ -1,9 +1,10 @@
 import {Routes} from "@angular/router";
+import {featureProductsRouting} from "./products/feature/product-shell/routes";
 
 export const routes: Routes = [
   {
     path: 'product',
-    loadChildren: () => import('./products/feature/product-shell/product-shell.module').then((module) => module.ProductShellModule)
+    children: featureProductsRouting
   },
   {
     path: 'shopping-cart',
