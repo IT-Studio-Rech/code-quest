@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Product} from '../../data-access/mock/MOCK_PRODUCT_LIST';
 import {ProductService} from '../../data-access/product.service';
 import {firstValueFrom} from 'rxjs';
@@ -16,8 +15,7 @@ export class ProductListComponent implements OnInit {
   public searchTags: string[] = [];
   public searchedProducts: Product[] = [];
 
-  constructor(private _http: HttpClient,
-              private _productService: ProductService) {
+  constructor(private _productService: ProductService) {
   }
 
   ngOnInit(): void {

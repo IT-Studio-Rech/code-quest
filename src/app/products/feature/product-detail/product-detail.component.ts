@@ -1,9 +1,9 @@
 // @ts-nocheck
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../data-access/product.service';
-import { firstValueFrom, Observable } from 'rxjs';
-import { Product } from '../../data-access/mock/MOCK_PRODUCT_LIST';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ProductService} from '../../data-access/product.service';
+import {firstValueFrom} from 'rxjs';
+import {Product} from '../../data-access/mock/MOCK_PRODUCT_LIST';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,7 +17,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _productService: ProductService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const id = this._route.snapshot.paramMap.get('id');
